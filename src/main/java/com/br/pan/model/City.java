@@ -10,15 +10,28 @@ public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    private String CEP;
     private String name;
+    
+    private State state;
 
-    public City(String cEP, String name) {
-        CEP = cEP;
-        this.setName(name);
+    public Long getId() {
+        return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+   
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+  
     public String getName() {
         return name;
     }
@@ -27,12 +40,5 @@ public class City {
         this.name = name;
     }
 
-    public String getCEP() {
-        return CEP;
-    }
-
-    public void setCEP(String cEP) {
-        this.CEP = cEP;
-    }
-
+   
 }

@@ -11,5 +11,5 @@ public interface CustomerService {
 
     public Customer search(String CPF );
 
-    public void delete(Customer customerDTO );
+    public void delete(String CPF );
 }

@@ -14,6 +14,7 @@ public class State {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String UF;
     private String name;
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
     private List<City> collCity;
@@ -22,6 +23,16 @@ public class State {
         this.id = id;
         this.name = name;
         this.collCity = collCity;
+    }
+
+
+    public String getUF() {
+        return UF;
+    }
+
+
+    public void setUF(String uF) {
+        this.UF = uF;
     }
 
 

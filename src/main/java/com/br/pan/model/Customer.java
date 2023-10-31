@@ -23,6 +23,14 @@ public class Customer {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<Product> productCol;
 
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public Customer(){}
+
     public Customer(String name, String cPF, Address address, List<Product> productCol) {
         this.name = name;
         CPF = cPF;
