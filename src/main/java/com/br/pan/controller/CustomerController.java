@@ -10,7 +10,8 @@ import com.br.pan.service.AddressService;
 import com.br.pan.service.CityService;
 import com.br.pan.service.CustomerService;
 import com.br.pan.service.StateService;
-import com.br.pan.vo.CustomerParams;
+import com.br.pan.vo.CustomerSaveParams;
+import com.br.pan.vo.CustomerUpdateParams;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,11 +43,10 @@ public class CustomerController {
     
 
 	@PostMapping(value = "/customer/save", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> create(@RequestBody CustomerParams customerRequest) throws Exception {
+	public ResponseEntity<String> create(@RequestBody CustomerSaveParams customerRequest) throws Exception {
 
 		logger.info("inserindo cliente"+customerRequest.getName());
 		logger.info("inserindo endereço"+customerRequest.getAddress().getStreet());
-		logger.info("tipo endereço"+customerRequest.getAddress().getAddressTypeId().getType());
 
 		Customer customer = new Customer();
 		customer.setName(customerRequest.getName());
@@ -62,7 +62,6 @@ public class CustomerController {
         state.setUF(customerRequest.getAddress().getUF());
 		address.setCity(city);
         address.getState().setName(customerRequest.getAddress().getState());
-        address.setAddressTypeId(customerRequest.getAddress().getAddressTypeId());
         cityService.save(city);
         stateService.save(state);
         address.setCity(city);
@@ -75,16 +74,12 @@ public class CustomerController {
 
 	}
 
-	@PutMapping(value = "/customer/edit", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> edit(@RequestBody CustomerParams customerRequest) throws Exception {
+	@PutMapping(value = "/customer/edit/address", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> edit(@RequestBody CustomerUpdateParams customerRequest) throws Exception {
 
-		logger.info("editando cliente"+customerRequest.getName());
-		logger.info("editando endereço"+customerRequest.getAddress().getStreet());
-		logger.info("editando endereço"+customerRequest.getAddress().getAddressTypeId().getType());
+		logger.info("editando endereço"+customerRequest.getAddress().getCity());
 
 		Customer customer = new Customer();
-		customer.setName(customerRequest.getName());
-		customer.setCPF(customerRequest.getCPF());
 		Address address = new Address();
         City city = new City();
 		address.setStreet(customerRequest.getAddress().getStreet());
@@ -96,7 +91,6 @@ public class CustomerController {
         state.setUF(customerRequest.getAddress().getUF());
 		address.setCity(city);
         address.getState().setName(customerRequest.getAddress().getState());
-        address.setAddressTypeId(customerRequest.getAddress().getAddressTypeId());
         cityService.save(city);
         stateService.save(state);
         address.setCity(city);
@@ -125,7 +119,7 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value = "/customer/searchOne", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody Customer searchOne(@RequestBody CustomerParams customerParams) {
+	public @ResponseBody Customer searchOne(@RequestBody CustomerSaveParams customerParams) {
 		logger.info("buscando cliente"+customerParams.getCPF());
 
 		Customer customerList = customerService.search(customerParams.getCPF());

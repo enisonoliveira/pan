@@ -1,5 +1,7 @@
 package com.br.pan.service.impl;
 
+import java.util.List;
+
 import com.br.pan.model.Customer;
 import com.br.pan.repository.CustomerRepository;
 import com.br.pan.service.CustomerService;
@@ -26,9 +28,17 @@ public class CustomerServiceImpl  implements CustomerService{
         return customerRepository.search(CPF);
     }
 
+
     @Override
-    public void delete(Customer customerDTO) {
-        customerRepository.delete(customerDTO);
+    public void delete(String CPF) {
+        customerRepository.delete(CPF);
+        
+    }
+
+    @Override
+    public List<Customer> findAll() {
+       
+        return customerRepository.findAll();
     }
     
 }

@@ -1,6 +1,5 @@
 package com.br.pan.vo;
 
-import com.br.pan.enume.AddressType;
 
 public class AddressParams {
     private String street;
@@ -9,19 +8,16 @@ public class AddressParams {
     private String city;
     private int number;
     private String state;
-    private AddressType  AddressTypeId ;
     private String nameCity;
     private String UF;
 
-    public AddressParams(String street, String neigborHood, String zipCode, String city, int number, String state,
-            AddressType addressTypeId) {
+    public AddressParams(String street, String neigborHood, String zipCode, String city, int number, String state) {
         this.street = street;
         this.neigborHood = neigborHood;
         this.zipCode = zipCode;
         this.city = city;
         this.number = number;
         this.state = state;
-        AddressTypeId = addressTypeId;
     }
 
 
@@ -44,19 +40,7 @@ public class AddressParams {
         this.UF = uF;
     }
 
-
- 
-    
-    public AddressType getAddressTypeId() {
-        if(AddressTypeId ==null){
-            return AddressType.AIRPORT;
-        }
-        return AddressTypeId;
-    }
-    public void setAddressTypeId(AddressType addressTypeId) {
-        this.AddressTypeId = addressTypeId;
-    }
-
+   
    
     
     public String getState() {

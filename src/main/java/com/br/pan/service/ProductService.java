@@ -12,5 +12,4 @@ public interface ProductService {
 
     public void delete(Product productDTO);
 
-    public List<Product> search(String CPF);
 }

@@ -29,12 +29,18 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public Address search(String CEP) {
-        return addressRepository.getReferenceCEP(CEP);
+        return null;
     }
 
     @Override
     public void delete(Address addressDTO) {
          addressRepository.delete(addressDTO);
+    }
+
+    @Override
+    public Address searchState(String state) {
+        return null;
+
     }
     
 }

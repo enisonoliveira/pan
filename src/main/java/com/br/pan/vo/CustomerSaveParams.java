@@ -1,13 +1,12 @@
 package com.br.pan.vo;
 
-
-public class CustomerParams {
+public class CustomerSaveParams {
 
     private String name;
     private String CPF;
     private AddressParams address;
     
-    public CustomerParams(String name, String CPF, AddressParams address) {
+    public CustomerSaveParams(String name, String CPF, AddressParams address) {
         this.name = name;
         this.CPF = CPF;
         this.address = address;

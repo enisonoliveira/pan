@@ -29,9 +29,4 @@ public class ProductServiceImpl implements ProductService {
         
     }
 
-    @Override
-    public List<Product> search(String CPF) {
-        return productRepository.search(CPF);
-    }
-    
 }

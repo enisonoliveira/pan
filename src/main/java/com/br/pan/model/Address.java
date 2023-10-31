@@ -1,17 +1,14 @@
 package com.br.pan.model;
 
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-
-import com.br.pan.enume.AddressType;
 
 @Entity
 public class Address {
@@ -19,12 +16,10 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToOne(cascade=CascadeType.ALL)
+    @ManyToOne
     private State  state;
-    @OneToOne(cascade=CascadeType.ALL)
+    @ManyToOne
     private City  city;
-    @Enumerated(EnumType.STRING)
-    private List<AddressType> addressType;
     private String street;
     private String neigborHood;
     private String zipCode;
@@ -51,10 +46,6 @@ public class Address {
 
     public void setState(State state) {
         this.state = state;
-    }
-
-    public void setAddressTypeId(AddressType addressTypeId) {
-        addressType.add(addressTypeId);
     }
 
     public int getNumber() {

@@ -10,5 +10,7 @@ public interface AddressService {
 
     public Address search(String CEP );
 
+    public Address searchState(String UF );
+
     public void delete(Address addressDTO );
 }

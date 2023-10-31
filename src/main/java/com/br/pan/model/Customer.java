@@ -21,7 +21,7 @@ public class Customer {
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private List<Product> productCol;
+    private List<ProductCustomer> productCol;
 
     public Long getId() {
         return id;
@@ -31,24 +31,12 @@ public class Customer {
     }
     public Customer(){}
 
-    public Customer(String name, String cPF, Address address, List<Product> productCol) {
-        this.name = name;
-        CPF = cPF;
-        this.address = address;
-        this.productCol = productCol;
-    }
 
     public String getName() {
         return name;
     }
 
-    public List<Product> getProductCol() {
-        return productCol;
-    }
-
-    public void setProductCol(List<Product> productCol) {
-        this.productCol = productCol;
-    }
+    
 
     public String getCPF() {
         return CPF;

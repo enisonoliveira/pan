@@ -30,7 +30,7 @@ public class CityServiceImpĺ  implements CityService{
 
     @Override
     public City search(String CEP) {
-        return cityRepository.search(CEP);
+        return null;
     }
     
 }
