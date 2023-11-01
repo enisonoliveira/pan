@@ -1,20 +1,18 @@
 package com.br.pan.model;
 
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Address {
     
+   
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     private State  state;
@@ -24,6 +22,19 @@ public class Address {
     private String neigborHood;
     private String zipCode;
     private int number;
+
+    public Address(Long id, State state,
+    City city, String street, String neigborHood, 
+    String zipCode, int number) {
+       this.id = id;
+       this.state = state;
+       this.city = city;
+       this.street = street;
+       this.neigborHood = neigborHood;
+       this.zipCode = zipCode;
+       this.number = number;
+   }
+
 
     public Address(State state) {
         this.state = state;

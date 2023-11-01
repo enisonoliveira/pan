@@ -1,10 +1,12 @@
 package com.br.pan.controller;
 
+import java.util.List;
+
 import com.br.pan.model.Customer;
 import com.br.pan.model.Product;
 import com.br.pan.model.ProductCustomer;
 import com.br.pan.service.ProductCustomerService;
-import com.br.pan.vo.ProductParamter;
+import com.br.pan.vo.ProdutoClienteRequestResponse;
 import com.google.gson.Gson;
 
 import org.slf4j.Logger;
@@ -15,9 +17,13 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class ProductCustomerController {
@@ -28,7 +34,7 @@ public class ProductCustomerController {
     private ProductCustomerService productCustomerService;
 
     @PostMapping(value = "/product/customer/save", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> saveProductCustomer(@RequestBody ProductParamter customerRequest) throws Exception {
+	public ResponseEntity<String> saveProductCustomer(@RequestBody ProdutoClienteRequestResponse customerRequest) throws Exception {
         
         Product productDTO = new Product();
         Customer customer = new Customer();
@@ -42,13 +48,8 @@ public class ProductCustomerController {
 
     }
 
-    @GetMapping(value = "/product/customer/search", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> searchCity(@RequestParam String CPF) throws Exception {
-        
-        Gson gson = new Gson ( );
-        return ResponseEntity
-        .status( HttpStatus.OK)
-        .header("X-Reason", "ok")
-        .body(gson.toJson(productCustomerService.search(CPF)));
+    @RequestMapping(value = "/product/customer/search/{CPF}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody List<ProductCustomer> searchCity(@PathVariable String CPF) throws Exception {
+        return productCustomerService.search(CPF);
     }
 }

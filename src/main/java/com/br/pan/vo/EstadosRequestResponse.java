@@ -1,15 +1,19 @@
 package com.br.pan.vo;
 
-import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class StateResponse {
+@JsonIgnoreProperties
+public class EstadosRequestResponse {
     @JsonProperty("id")
     private String id;
     @JsonProperty("sigla")
     private String sigla;
+    @JsonProperty("regiao")
+    private Location colRegiao;
     @JsonProperty("nome")
+
     private String nome;
     public String getId() {
         return id;
@@ -29,14 +33,13 @@ public class StateResponse {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    public Regiao getColRegiao() {
+    public Location getColRegiao() {
         return colRegiao;
     }
-    public void setColRegiao(Regiao colRegiao) {
+    public void setColRegiao(Location colRegiao) {
         this.colRegiao = colRegiao;
     }
-    @JsonProperty("regiao")
-    private Regiao colRegiao;
+   
     
    
 }

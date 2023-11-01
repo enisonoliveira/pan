@@ -1,6 +1,9 @@
 package com.br.pan.vo;
 
-public class ProductParamter {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties
+public class ProdutoClienteRequestResponse {
     private Long customerId;
     private Long producId;
   

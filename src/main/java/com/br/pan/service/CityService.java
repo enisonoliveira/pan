@@ -4,11 +4,12 @@ import com.br.pan.model.City;
 
 public interface CityService {
     
-    public City save(City  cityDTO);
+    public City save(City  cityDTO)throws Exception;
 
-    public City update(City  cityDTO);
+    public City update(City  cityDTO)throws Exception;
 
-    public void delete(City  cityDTO);
+    public void delete(City  cityDTO)throws Exception;
 
-    public City search(String CEP);
+    public City search(Long id) throws Exception;
+
 }

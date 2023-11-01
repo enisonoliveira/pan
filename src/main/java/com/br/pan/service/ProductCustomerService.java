@@ -8,7 +8,7 @@ public interface ProductCustomerService {
     
     public ProductCustomer save(ProductCustomer product);
 
-    public void delete(ProductCustomer product);
+    public void delete(ProductCustomer product)throws Exception;
 
-    public List<ProductCustomer> search(String CPFCustomer);
+    public List<ProductCustomer> search(String CPFCustomer)throws Exception;
 }

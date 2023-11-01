@@ -4,8 +4,8 @@ import com.br.pan.model.Customer;
 import com.br.pan.model.Product;
 import com.br.pan.service.CustomerService;
 import com.br.pan.service.ProductService;
-import com.br.pan.vo.ProductCustomerParams;
-import com.br.pan.vo.ProductParamter;
+import com.br.pan.vo.ProdutoRequestResponse;
+import com.br.pan.vo.ProdutoClienteRequestResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +26,7 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping(value = "/product/save", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> create(@RequestBody ProductCustomerParams customerRequest) throws Exception {
+	public ResponseEntity<String> create(@RequestBody ProdutoRequestResponse customerRequest) throws Exception {
         
         Product productDTO = new Product();
         productDTO.setName(customerRequest.getProducName());
@@ -37,7 +37,12 @@ public class ProductController {
 
 
     @PutMapping(value = "/product/update", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> update(@RequestBody ProductCustomerParams customerRequest) throws Exception {
-        return null;
+	public ResponseEntity<String> update(@RequestBody ProdutoRequestResponse customerRequest) throws Exception {
+        Product productDTO = new Product();
+        productDTO.setName(customerRequest.getProducName());
+        productDTO.setId(customerRequest.getId());
+        productService.update(productDTO);
+        return new ResponseEntity<String>("alterado id:" + productDTO.getId(), HttpStatus.CREATED);
+
     }
 }

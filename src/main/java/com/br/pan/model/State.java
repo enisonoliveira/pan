@@ -1,27 +1,29 @@
 package com.br.pan.model;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 @Entity
 public class State {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private String UF;
     private String name;
-    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
-    private List<City> collCity;
+    public Long getId() {
+        return id;
+    }
 
-    public State(Long id, String name, List<City> collCity) {
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public State(Long id, String name, String UF) {
         this.id = id;
         this.name = name;
-        this.collCity = collCity;
+        this.UF=UF;
     }
 
 
@@ -38,14 +40,6 @@ public class State {
         this.UF = uF;
     }
 
-
-    public List<City> getCollCity() {
-        return collCity;
-    }
-
-    public void setCollCity(List<City> collCity) {
-        this.collCity = collCity;
-    }
 
     public String getName() {
         return name;

@@ -8,12 +8,19 @@ import javax.persistence.ManyToOne;
 @Entity
 public class City {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.AUTO) 
     private Long id;
     private String name;
+    private String numero;
     @ManyToOne
     private State state;
     public City(){}
+    public String getNumero() {
+        return numero;
+    }
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
     public City(Long id, String name, State state) {
         this.id = id;
         this.name = name;

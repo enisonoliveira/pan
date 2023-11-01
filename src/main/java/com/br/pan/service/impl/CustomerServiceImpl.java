@@ -6,11 +6,17 @@ import com.br.pan.model.Customer;
 import com.br.pan.repository.CustomerRepository;
 import com.br.pan.service.CustomerService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class CustomerServiceImpl  implements CustomerService{
 
+    Logger logger = LoggerFactory.getLogger( CustomerServiceImpl.class);
+    @Autowired
     private CustomerRepository customerRepository;
 
     @Override
@@ -30,7 +36,10 @@ public class CustomerServiceImpl  implements CustomerService{
 
 
     @Override
-    public void delete(String CPF) {
+    public void delete(String CPF) throws Exception {
+        if( search(CPF)==null ){
+            throw new Exception("CPF informado não existe");
+        }
         customerRepository.delete(CPF);
         
     }

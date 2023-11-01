@@ -2,7 +2,7 @@ package com.br.pan.vo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Regiao {
+public class Location {
     public String getId() {
         return id;
     }

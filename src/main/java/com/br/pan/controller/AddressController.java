@@ -27,7 +27,11 @@ public class AddressController {
     @GetMapping(value = "/address/search")
 	public ResponseEntity<String> searchCEP(@RequestParam String CEP) throws Exception {
         
-        return addressService.search(CEP);
+        Gson gson = new Gson ( );
+        return ResponseEntity
+        .status( HttpStatus.OK)
+        .header("X-Reason", "ok")
+        .body(gson.toJson(  addressService.search(CEP)));
     }
 
     @GetMapping(value = "/address/search/city")

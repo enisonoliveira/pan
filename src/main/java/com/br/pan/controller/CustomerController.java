@@ -10,8 +10,8 @@ import com.br.pan.service.AddressService;
 import com.br.pan.service.CityService;
 import com.br.pan.service.CustomerService;
 import com.br.pan.service.StateService;
-import com.br.pan.vo.CustomerSaveParams;
-import com.br.pan.vo.CustomerUpdateParams;
+import com.br.pan.vo.CustomerRequestSave;
+import com.br.pan.vo.ClienteRequestUpdate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,30 +45,25 @@ public class CustomerController {
     
 
 	@PostMapping(value = "/customer/save", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> create(@RequestBody CustomerSaveParams customerRequest) throws Exception {
+	public ResponseEntity<String> create(@RequestBody CustomerRequestSave customerRequest) throws Exception {
 
-		logger.info("inserindo cliente"+customerRequest.getName());
-		logger.info("inserindo endereço"+customerRequest.getAddress().getStreet());
+		logger.info("inserindo cliente"+customerRequest.getNome());
 
 		Customer customer = new Customer();
-		customer.setName(customerRequest.getName());
+		customer.setName(customerRequest.getNome());
 		customer.setCPF(customerRequest.getCPF());
-		Address address = new Address();
-        City city = new City();
-		address.setStreet(customerRequest.getAddress().getStreet());
-		address.setNeigborHood(customerRequest.getAddress().getNeigborHood());
-		address.setZipCode(customerRequest.getAddress().getZipCode());
-		address.setNumber(customerRequest.getAddress().getNumber());
-        city.setName(customerRequest.getAddress().getNameCity());
-        State state = new State();
-        state.setUF(customerRequest.getAddress().getUF());
+		Address address = addressService.search(customerRequest.getAddress().getCep());        
+		City city = new City();
+		city.setName(customerRequest.getAddress().getNomeMunicipio());
+		address.setNumber(customerRequest.getAddress().getNumero());
+        State state = stateService.searchExternal(customerRequest.getAddress().getUf());
+		state= stateService.save(state);
+		city.setState(state);
+		city=cityService.save(city);
 		address.setCity(city);
-        address.getState().setName(customerRequest.getAddress().getState());
-        cityService.save(city);
-        stateService.save(state);
-        address.setCity(city);
+		address.setZipCode(customerRequest.getAddress().getCep());
         address.setState(state);
-        addressService.save(address);
+		address= addressService.save(address);
         customer.setAddress(address);
 		customerService.save(customer);
 	
@@ -77,35 +72,24 @@ public class CustomerController {
 	}
 
 	@PutMapping(value = "/customer/edit/address", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> edit(@RequestBody CustomerUpdateParams customerRequest) throws Exception {
+	public ResponseEntity<String> edit(@RequestBody ClienteRequestUpdate customerRequest) throws Exception {
 
-		logger.info("editando endereço"+customerRequest.getAddress().getCity());
-
-		Customer customer = new Customer();
-		Address address = new Address();
-        City city = new City();
-		address.setStreet(customerRequest.getAddress().getStreet());
-		address.setNeigborHood(customerRequest.getAddress().getNeigborHood());
-		address.setZipCode(customerRequest.getAddress().getZipCode());
-		address.setNumber(customerRequest.getAddress().getNumber());
-        city.setName(customerRequest.getAddress().getNameCity());
-        State state = new State();
-        state.setUF(customerRequest.getAddress().getUF());
+		Address address = addressService.search(customerRequest.getAddress().getCep());        City city = new City();
+		city.setName(customerRequest.getAddress().getNomeMunicipio());
+		address.setNumber(customerRequest.getAddress().getNumero());
+        State state = stateService.searchExternal(customerRequest.getAddress().getUf());
+		state= stateService.save(state);
+		city.setState(state);
+		city=cityService.save(city);
 		address.setCity(city);
-        address.getState().setName(customerRequest.getAddress().getState());
-        cityService.save(city);
-        stateService.save(state);
-        address.setCity(city);
         address.setState(state);
-        addressService.save(address);
-        customer.setAddress(address);
-		customerService.save(customer);
+		address= addressService.update(address);
 	
-	    return new ResponseEntity<String>("editado idcustomer:" + customer.getId(), HttpStatus.OK);
+	    return new ResponseEntity<String>("editado endereço:" + address.getNeigborHood(), HttpStatus.OK);
 	}
 
-	@DeleteMapping(path = "/customer/delete/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public  ResponseEntity<String> searchList(@PathVariable String CPF) throws Exception {
+	@DeleteMapping(path = "/customer/delete/{CPF}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public  ResponseEntity<String> searchDel(@PathVariable String CPF) throws Exception {
 
 		customerService.delete(CPF);
 
@@ -114,19 +98,14 @@ public class CustomerController {
 
 	@RequestMapping(value = "/customer/searchAll", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody List<Customer> searchAll() {
-	
 		List<Customer> customerList = customerService.findAll();
-
 		return customerList;
 	}
 
-	@RequestMapping(value = "/customer/searchOne", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody Customer searchOne(@RequestBody CustomerSaveParams customerParams) {
-		logger.info("buscando cliente"+customerParams.getCPF());
-
-		Customer customerList = customerService.search(customerParams.getCPF());
-
-
+	@RequestMapping(value = "/customer/search/{CPF}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody Customer searchCPF(@PathVariable String CPF) {
+		logger.info("buscando cliente"+CPF);
+		Customer customerList = customerService.search(CPF);
 		return customerList;
 	}
 }

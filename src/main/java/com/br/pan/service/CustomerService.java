@@ -13,7 +13,7 @@ public interface CustomerService {
 
     public Customer search(String CPF );
 
-    public void delete(String CPF );
+    public void delete(String CPF ) throws Exception;
 
     public List<Customer> findAll();
 }

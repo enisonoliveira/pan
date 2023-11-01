@@ -9,8 +9,14 @@ import com.br.pan.service.ProductCustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Service
 public class ProductCustomerServiceImpl implements ProductCustomerService {
+
+    Logger logger = LoggerFactory.getLogger( ProductCustomerServiceImpl.class);
 
     @Autowired
     private ProductCustomerRepository productCustomerRepository;
@@ -20,13 +26,20 @@ public class ProductCustomerServiceImpl implements ProductCustomerService {
     }
 
     @Override
-    public void delete(ProductCustomer product) {
+    public void delete(ProductCustomer product) throws Exception {
+        if(productCustomerRepository.existsById( product.getId())){
+            throw new Exception("Id de Municipio não informado");
+        }
         productCustomerRepository.delete(product);
     }
 
     @Override
-    public List<ProductCustomer> search(String CPFCustomer) {
-        return productCustomerRepository.search(CPFCustomer);
+    public List<ProductCustomer> search(String CPFCustomer) throws Exception {
+        List<ProductCustomer> list= productCustomerRepository.search(CPFCustomer);
+        if( list==null ){
+            throw new Exception("Não encontrado");
+        }
+        return list;
     }
     
 }
