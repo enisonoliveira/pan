@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -58,6 +58,7 @@ public class AddressServiceImpl extends ExternalService implements AddressServic
     }
 
     @Override
+    @Cacheable(value = "addressCEPCache")
     public Address search(String CEP) throws URISyntaxException, InterruptedException {
         logger.info("====procurando no bd o endereço====");
         ObjectMapper objectMapper = new ObjectMapper();
@@ -85,6 +86,7 @@ public class AddressServiceImpl extends ExternalService implements AddressServic
     }
 
     @Override
+    @Cacheable(value = "address_methods")
     public EstadosRequestResponse[] searchAllState() throws InterruptedException, URISyntaxException {
         ResponseEntity<String> states = super.getAddresState();
         ObjectMapper objectMapper = new ObjectMapper();

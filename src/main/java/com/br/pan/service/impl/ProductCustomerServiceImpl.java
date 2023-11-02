@@ -7,6 +7,7 @@ import com.br.pan.repository.ProductCustomerRepository;
 import com.br.pan.service.ProductCustomerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 
@@ -36,6 +37,7 @@ public class ProductCustomerServiceImpl implements ProductCustomerService {
     }
 
     @Override
+    @Cacheable(value = "_methods")
     public List<ProductCustomer> search(String CPFCustomer) throws Exception {
         List<ProductCustomer> list= productCustomerRepository.search(CPFCustomer);
         if( list==null ){

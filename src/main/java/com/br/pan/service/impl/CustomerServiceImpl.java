@@ -7,6 +7,7 @@ import com.br.pan.repository.CustomerRepository;
 import com.br.pan.service.CustomerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import org.slf4j.Logger;
@@ -59,6 +60,7 @@ public class CustomerServiceImpl  implements CustomerService{
     }
 
     @Override
+    @Cacheable(value = "customerCache")
     public List<Customer> findAll() {
         logger.info("listando todos os clientes");
         return customerRepository.findAll();

@@ -1,0 +1,15 @@
+
+version: "3"
+services:
+  api-database:
+    image: 'bitnami/redis:latest'
+    environment:
+     - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - 6379:6379
+  api:
+    image: api-pan
+    ports:
+      - 8082:8080
+    links:
+      - api-database
