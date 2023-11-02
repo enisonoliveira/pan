@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Service
-public class ExternalService {
+public abstract class ExternalService {
     
     Logger logger = LoggerFactory.getLogger( ExternalService.class);
 
