@@ -64,7 +64,7 @@ public class ProductCustomerServiceImplTest {
         addressDTO = addressService.save(addressDTO);
 
         Customer customerDTO = new Customer();
-        customerDTO.setCPF("12312312");
+        customerDTO.setCPF("38106405700");
         customerDTO.setName("Es");
         customerDTO.setId(1L);
         customerDTO.setAddress(addressDTO);

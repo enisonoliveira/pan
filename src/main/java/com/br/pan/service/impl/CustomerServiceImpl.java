@@ -27,8 +27,8 @@ public class CustomerServiceImpl  implements CustomerService{
             logger.warn("CPF já existe "+ customerDTO.getCPF());
             return customerDTO;
         }else{
-            if(customerDTO.getCPF().length()!=8){
-                logger.error("CPF esta incorreto");   
+            if(customerDTO.getCPF().length()!=11){
+                logger.error("CPF esta incorreto "+customerDTO.getCPF().length());   
                 throw new Exception("CPF esta incorreto");
             }
         }

@@ -51,7 +51,7 @@ public class CustomerServiceImplTest {
         addressDTO = addressService.save(addressDTO);
 
         Customer customerDTO = new Customer();
-        customerDTO.setCPF("12312312");
+        customerDTO.setCPF("38106405700");
         customerDTO.setName("Es");
         customerDTO.setId(1L);
         customerDTO.setAddress(addressDTO);
@@ -86,7 +86,7 @@ public class CustomerServiceImplTest {
         addressDTO = addressService.save(addressDTO);
 
         Customer customerDTO = new Customer();
-        customerDTO.setCPF("12312312");
+        customerDTO.setCPF("38106405700");
         customerDTO.setName("Es");
         customerDTO.setId(1L);
         customerDTO.setAddress(addressDTO);
@@ -99,10 +99,10 @@ public class CustomerServiceImplTest {
     @Test
     void searchCPFTest() {
         Customer customerDTO = new Customer();
-        customerDTO.setCPF("12312312");
+        customerDTO.setCPF("38106405700");
         customerDTO.setName("Es");
         customerDTO.setId(1L);
-        Customer customer =  customerService.search("12312312");
+        Customer customer =  customerService.search("38106405700");
         assertEquals(customer.getCPF(),customerDTO.getCPF());
         assertEquals(customer.getName(),customerDTO.getName());
     }
