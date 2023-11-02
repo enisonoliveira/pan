@@ -2,7 +2,7 @@ package com.br.pan.vo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Location {
+public class MunicipioRequest {
     public String getId() {
         return id;
     }

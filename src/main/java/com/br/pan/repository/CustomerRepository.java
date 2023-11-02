@@ -1,5 +1,6 @@
 package com.br.pan.repository;
 
+import com.br.pan.model.Address;
 import com.br.pan.model.Customer;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,5 +16,8 @@ public interface CustomerRepository  extends JpaRepository<Customer, Long>{
 
     @Query("SELECT A FROM Customer  A  WHERE A.CPF=?1")
     Customer search(String cPF);
+
+    @Query("SELECT ad FROM Customer A INNER JOIN A.address  ad  WHERE A.CPF=?1")
+    Address getAddressCPF(String cpf);
     
 }

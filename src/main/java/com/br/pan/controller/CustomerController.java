@@ -52,9 +52,13 @@ public class CustomerController {
 		Customer customer = new Customer();
 		customer.setName(customerRequest.getNome());
 		customer.setCPF(customerRequest.getCPF());
+		
 		Address address = addressService.search(customerRequest.getAddress().getCep());        
+		
 		City city = new City();
+		
 		address.setNumber(customerRequest.getAddress().getNumero());
+
         State state = stateService.searchExternal(customerRequest.getAddress().getUf());
 		state= stateService.save(state);
 
@@ -66,7 +70,7 @@ public class CustomerController {
 		address.setZipCode(customerRequest.getAddress().getCep());
         address.setState(state);
 		address= addressService.save(address);
-		
+
         customer.setAddress(address);
 		customerService.save(customer);
 	
@@ -76,14 +80,23 @@ public class CustomerController {
 
 	@PutMapping(value = "/customer/edit/address", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> edit(@RequestBody ClienteRequestUpdate customerRequest) throws Exception {
+		
+		Address oldAddress = addressService.searchAddresCPF(customerRequest.getCPF());
 
-		Address address = addressService.search(customerRequest.getAddress().getCep());        City city = new City();
+		Address address = addressService.search(customerRequest.getAddress().getCep());        
+		address.setId(oldAddress.getId());
+
+		City city = new City();
 		city=cityService.searchExternal(customerRequest.getAddress().getNumeroIBGEMunicipio());
+		
 		address.setNumber(customerRequest.getAddress().getNumero());
-        State state = stateService.searchExternal(customerRequest.getAddress().getUf());
+        
+		State state = stateService.searchExternal(customerRequest.getAddress().getUf());
 		state= stateService.save(state);
+		
 		city.setState(state);
 		city=cityService.save(city);
+
 		address.setCity(city);
         address.setState(state);
 		address= addressService.update(address);

@@ -11,7 +11,7 @@ public class EstadosRequestResponse {
     @JsonProperty("sigla")
     private String sigla;
     @JsonProperty("regiao")
-    private Location colRegiao;
+    private MunicipioRequest colRegiao;
     @JsonProperty("nome")
 
     private String nome;
@@ -33,10 +33,10 @@ public class EstadosRequestResponse {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    public Location getColRegiao() {
+    public MunicipioRequest getColRegiao() {
         return colRegiao;
     }
-    public void setColRegiao(Location colRegiao) {
+    public void setColRegiao(MunicipioRequest colRegiao) {
         this.colRegiao = colRegiao;
     }
    

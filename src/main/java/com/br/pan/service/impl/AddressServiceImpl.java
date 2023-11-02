@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.br.pan.model.Address;
 import com.br.pan.repository.AddressRepository;
+import com.br.pan.repository.CustomerRepository;
 import com.br.pan.service.AddressService;
 import com.br.pan.vo.EnderecoRequestResponse;
 import com.br.pan.vo.EstadosRequestResponse;
@@ -28,12 +29,14 @@ import org.slf4j.LoggerFactory;
 public class AddressServiceImpl extends ExternalService implements AddressService {
 
     private AddressRepository addressRepository;
+    private CustomerRepository customerRepository;
 
     Logger logger = LoggerFactory.getLogger(AddressServiceImpl.class);
 
     @Autowired
-    public AddressServiceImpl(AddressRepository addressRepository) {
+    public AddressServiceImpl(AddressRepository addressRepository,CustomerRepository customerRepository) {
         this.addressRepository = addressRepository;
+        this.customerRepository=customerRepository;
     }
 
     @Override
@@ -140,6 +143,11 @@ public class AddressServiceImpl extends ExternalService implements AddressServic
             countPositionStateArray++;
         }
         return newStateResponse;
+    }
+
+    @Override
+    public Address searchAddresCPF(String cpf) {
+        return  customerRepository.getAddressCPF(cpf);
     }
 
 }

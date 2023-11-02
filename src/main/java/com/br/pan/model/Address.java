@@ -1,6 +1,5 @@
 package com.br.pan.model;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,37 +8,43 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Address {
-    
-   
+
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    private State  state;
+    private State state;
     @ManyToOne
-    private City  city;
+    private City city;
     private String street;
     private String neigborHood;
     private String zipCode;
     private int number;
 
     public Address(Long id, State state,
-    City city, String street, String neigborHood, 
-    String zipCode, int number) {
-       this.id = id;
-       this.state = state;
-       this.city = city;
-       this.street = street;
-       this.neigborHood = neigborHood;
-       this.zipCode = zipCode;
-       this.number = number;
-   }
+            City city, String street, String neigborHood,
+            String zipCode, int number) {
+        this.id = id;
+        this.state = state;
+        this.city = city;
+        this.street = street;
+        this.neigborHood = neigborHood;
+        this.zipCode = zipCode;
+        this.number = number;
+    }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Address(State state) {
         this.state = state;
     }
-   
+
     public City getCity() {
         return city;
     }

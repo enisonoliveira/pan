@@ -20,4 +20,6 @@ public interface AddressService {
     public void delete(Address addressDTO );
 
     public  ResponseEntity<String>  searchCity(String id) throws URISyntaxException, InterruptedException ;
+
+    public Address searchAddresCPF(String cpf);
 }

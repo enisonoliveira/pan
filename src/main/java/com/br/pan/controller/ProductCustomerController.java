@@ -34,12 +34,16 @@ public class ProductCustomerController {
 	public ResponseEntity<String> saveProductCustomer(@RequestBody ProdutoClienteRequestResponse customerRequest) throws Exception {
         
         Product productDTO = new Product();
-        Customer customer = new Customer();
+
+        Customer customerDTO = new Customer();
+
         ProductCustomer productCustomer = new ProductCustomer();
-        customer.setId(customerRequest.getCustomerId());
+
+        customerDTO.setId(customerRequest.getCustomerId());
+
         productDTO.setId(customerRequest.getProducId());
         productCustomer.setProduct(productDTO);
-        productCustomer.setCustomer(customer);
+        productCustomer.setCustomer(customerDTO);
         productCustomerService.save(productCustomer);
         return new ResponseEntity<String>("inserido id:" + productDTO.getId(), HttpStatus.CREATED);
 
