@@ -51,7 +51,7 @@ public class AddressControllerTest {
 
     @Test
     void shouldReturnLocationCitytMessage() throws Exception {
-        this.mockMvc.perform(get("/address/search/municipio?codigo=33")).andDo(print()).andExpect(status().isOk())
+        this.mockMvc.perform(get("/address/search/location?codigo=33")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString("Rio de Janeiro")));
     }
 }

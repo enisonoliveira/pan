@@ -32,7 +32,7 @@ public class AddressController {
                 .body(gson.toJson(addressService.search(CEP)));
     }
 
-    @GetMapping(value = "/address/search/municipio")
+    @GetMapping(value = "/address/search/location")
     public ResponseEntity<String> searchCityId(@RequestParam String codigo) throws Exception {
 
         return addressService.searchCity(codigo);
