@@ -21,12 +21,19 @@ public class ProductCustomerServiceImpl implements ProductCustomerService {
 
     @Autowired
     private ProductCustomerRepository productCustomerRepository;
+
+    /*
+    *@see public ProductCustomer save(ProductCustomer product)
+    */
     @Override
     public ProductCustomer save(ProductCustomer product) {
         logger.info("====adicionando produto ao perfil do cliente====");
         return productCustomerRepository.save(product);
     }
 
+    /*
+    *@see  public void delete(ProductCustomer product) 
+    */
     @Override
     public void delete(ProductCustomer product) throws Exception {
         if(!productCustomerRepository.existsById( product.getId())){
@@ -36,6 +43,9 @@ public class ProductCustomerServiceImpl implements ProductCustomerService {
         productCustomerRepository.delete(product);
     }
 
+    /*
+    *@see   public List<ProductCustomer> search(String CPFCustomer) 
+    */
     @Override
     @Cacheable(value = "_methods")
     public List<ProductCustomer> search(String CPFCustomer) throws Exception {

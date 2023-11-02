@@ -20,6 +20,9 @@ public class CustomerServiceImpl  implements CustomerService{
     @Autowired
     private CustomerRepository customerRepository;
 
+    /*
+    *@see  public Customer save(Customer customerDTO)
+    */
     @Override
     public Customer save(Customer customerDTO) throws Exception {
         logger.info("====salvando no bd o cliente====");
@@ -35,19 +38,27 @@ public class CustomerServiceImpl  implements CustomerService{
         return customerRepository.save(customerDTO);
     }
 
+    /*
+    *@see  public Customer update(Customer customerDTO) 
+    */
     @Override
     public Customer update(Customer customerDTO) {
         logger.info("====aterando no bd o cliente====");
         return customerRepository.save(customerDTO);
     }
 
+    /*
+    *@see  public Customer search(String CPF)
+    */
     @Override
     public Customer search(String CPF) {
         logger.info("====procurando no bd o cliente====");
         return customerRepository.search(CPF);
     }
 
-
+    /*
+    *@see  public void delete(String CPF) 
+    */
     @Override
     public void delete(String CPF) throws Exception {
         logger.info("====delete no bd o cliente====");
@@ -59,6 +70,9 @@ public class CustomerServiceImpl  implements CustomerService{
         
     }
 
+    /*
+    *@see   public List<Customer> findAll()
+    */
     @Override
     @Cacheable(value = "customerCache")
     public List<Customer> findAll() {

@@ -26,6 +26,9 @@ public class StateServiceImpl extends ExternalService implements StateService {
     @Autowired
     private StateRepository stateRepository;
 
+     /*
+    *@see public State save(State stateDTO) 
+    */
     @Override
     public State save(State stateDTO) {
         State search= search(stateDTO.getUF());
@@ -37,25 +40,35 @@ public class StateServiceImpl extends ExternalService implements StateService {
         return stateRepository.save(stateDTO);
     }
 
+    /*
+    *@see  public void delete(State stateDTO)
+    */
     @Override
     public State update(State stateDTO) {
         logger.info("====alterando estado====");
         return stateRepository.save(stateDTO);
     }
-
+    /*
+    *@see  public void delete(State stateDTO)
+    */
     @Override
     public void delete(State stateDTO) {
         logger.info("====deletando estado====");
          stateRepository.delete(stateDTO);
     }
 
+    /*
+    *@see public State search(String UF)
+    */
     @Override
     public State search(String UF) {
         logger.info("====buscando todos os estado exitente na base====");
         return  stateRepository.search(UF);
     }
 
-
+    /*
+    *@see   public  State searchExternal(String UF)
+    */
     @Override
     @Cacheable(value = "_methods")
     public  State searchExternal(String UF)  {

@@ -39,24 +39,36 @@ public class AddressServiceImpl extends ExternalService implements AddressServic
         this.customerRepository=customerRepository;
     }
 
-    @Override
-    public Address save(Address addressDTO) {
+    /*
+    *@see  public Address save(Address addressDTO) 
+    */
+   @Override
+   public Address save(Address addressDTO) {
         logger.info("====salvando no bd o endereço====");
         return addressRepository.save(addressDTO);
     }
 
+     /*
+    *@see public Address update(Address addressDTO)
+    */
     @Override
     public Address update(Address addressDTO) {
         logger.info("====alterando no bd o endereço====");
         return addressRepository.save(addressDTO);
     }
 
+     /*
+    *@see   public void delete(Address addressDTO)
+    */
     @Override
     public void delete(Address addressDTO) {
         logger.info("====deletando no bd o endereço====");
         addressRepository.delete(addressDTO);
     }
 
+    /*
+    *@see public Address search(String CEP)
+    */
     @Override
     @Cacheable(value = "addressCEPCache")
     public Address search(String CEP) throws URISyntaxException, InterruptedException {
@@ -80,11 +92,17 @@ public class AddressServiceImpl extends ExternalService implements AddressServic
         return address;
     }
 
+    /*
+    *@see public ResponseEntity<String> searchCity(String id) 
+    */
     @Override
     public ResponseEntity<String> searchCity(String id) throws URISyntaxException, InterruptedException {
         return super.getAddressCity(id);
     }
 
+    /*
+    *@see public EstadosRequestResponse[] searchAllState()
+    */
     @Override
     @Cacheable(value = "address_methods")
     public EstadosRequestResponse[] searchAllState() throws InterruptedException, URISyntaxException {
@@ -147,6 +165,9 @@ public class AddressServiceImpl extends ExternalService implements AddressServic
         return newStateResponse;
     }
 
+    /*
+    *@see  public Address searchAddresCPF(String cpf) 
+    */
     @Override
     public Address searchAddresCPF(String cpf) {
         return  customerRepository.getAddressCPF(cpf);

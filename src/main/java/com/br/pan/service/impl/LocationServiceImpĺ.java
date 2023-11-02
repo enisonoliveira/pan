@@ -22,6 +22,9 @@ public class LocationServiceImpĺ extends ExternalService implements LocationSer
     @Autowired
     private CityRepository cityRepository;
 
+    /*
+    *@see   public Location save(Location cityDTO)
+    */
     @Override
     public Location save(Location cityDTO) throws Exception {
 
@@ -32,6 +35,9 @@ public class LocationServiceImpĺ extends ExternalService implements LocationSer
         return cityRepository.save(cityDTO);
     }
 
+    /*
+    *@see  public Location update(Location cityDTO)
+    */
     @Override
     public Location update(Location cityDTO) throws Exception {
         if (!cityRepository.existsById(cityDTO.getId())) {
@@ -41,6 +47,9 @@ public class LocationServiceImpĺ extends ExternalService implements LocationSer
         return cityRepository.save(cityDTO);
     }
 
+    /*
+    *@see public void delete(Location cityDTO) 
+    */
     @Override
     public void delete(Location cityDTO) throws Exception {
         if (!cityRepository.existsById(cityDTO.getId())) {
@@ -50,6 +59,9 @@ public class LocationServiceImpĺ extends ExternalService implements LocationSer
         cityRepository.delete(cityDTO);
     }
 
+    /*
+    *@see    public Location search(Long id) 
+    */
     @Override
     public Location search(Long id) throws Exception {
         if (id == null) {
@@ -60,6 +72,9 @@ public class LocationServiceImpĺ extends ExternalService implements LocationSer
         return cityRepository.findById(id).get();
     }
 
+    /*
+    *@see  public Location searchExternal(String id)
+    */
     @Override
     @Cacheable(value = "locationCache")
     public Location searchExternal(String id) throws Exception {

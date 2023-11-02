@@ -18,18 +18,27 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private  ProductRepository productRepository;
 
+    /*
+    *@see  public Product save(Product productDTO) 
+    */
     @Override
     public Product save(Product productDTO) {
         logger.info("====salvando os dados do produto====");
         return productRepository.save(productDTO);
     }
 
+    /*
+    *@see  public Product update(Product productDTO)
+    */
     @Override
     public Product update(Product productDTO) {
         logger.info("====alterando os dados do produto====");
         return productRepository.save(productDTO);
     }
 
+    /*
+    *@see  public void delete(Product productDTO) 
+    */
     @Override
     public void delete(Product productDTO) {
         logger.info("====deletando o produto:"+ productDTO.getName());
