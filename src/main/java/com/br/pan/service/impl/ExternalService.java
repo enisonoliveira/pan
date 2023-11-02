@@ -43,8 +43,8 @@ public class ExternalService {
         ResponseEntity<String> result=restTemplate.getForEntity(uri, String.class);
         return result;
     }
- //https://servicodados.ibge.gov.br/api/v1/localidades/distritos/
-    public  ResponseEntity<String>   searchUF(String uF) throws URISyntaxException {
+
+    protected  ResponseEntity<String>   searchUF(String uF) throws URISyntaxException {
         logger.info("====ExternalService buscando o estado pelo UF====");
         RestTemplate restTemplate = new RestTemplate();
         final String baseUrl ="https://servicodados.ibge.gov.br/api/v1/localidades/estados/"+uF;
@@ -53,7 +53,7 @@ public class ExternalService {
         return result;
     }
 
-    public  ResponseEntity<String>   searchLocation(String ibge) throws URISyntaxException {
+    protected  ResponseEntity<String>   searchLocation(String ibge) throws URISyntaxException {
         logger.info("====ExternalService buscando o estado pelo UF====");
         RestTemplate restTemplate = new RestTemplate();
         final String baseUrl ="https://servicodados.ibge.gov.br/api/v1/localidades/distritos/"+ibge;
