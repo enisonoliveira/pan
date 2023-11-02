@@ -3,6 +3,7 @@ package com.br.pan.controller;
 import java.net.URISyntaxException;
 
 import com.br.pan.service.AddressService;
+import com.br.pan.service.LocationService;
 import com.google.gson.Gson;
 
 import org.slf4j.Logger;
@@ -13,6 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.br.pan.model.Location;
 
 @Controller
 public class AddressController {
@@ -21,6 +25,8 @@ public class AddressController {
 
     @Autowired
     private AddressService addressService;
+    @Autowired
+    private LocationService cityService;
 
     @GetMapping(value = "/address/search")
     public ResponseEntity<String> searchCEP(@RequestParam String CEP) throws Exception {
@@ -33,9 +39,9 @@ public class AddressController {
     }
 
     @GetMapping(value = "/address/search/location")
-    public ResponseEntity<String> searchCityId(@RequestParam String codigo) throws Exception {
+    public  @ResponseBody Location searchCityId(@RequestParam String codigo) throws Exception {
 
-        return addressService.searchCity(codigo);
+        return cityService.searchExternal(codigo);
     }
 
     @GetMapping(value = "/address/search/state")
