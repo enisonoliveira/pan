@@ -3,13 +3,13 @@ package com.br.pan.vo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties
-public class CustomerRequestSave {
+public class ClienteRequestSave {
 
     private String nome;
     private String CPF;
     private EnderecoRequestResponse address;
     
-    public CustomerRequestSave(String nome, String CPF, EnderecoRequestResponse address) {
+    public ClienteRequestSave(String nome, String CPF, EnderecoRequestResponse address) {
         this.setNome(nome);
         this.CPF = CPF;
         this.address = address;

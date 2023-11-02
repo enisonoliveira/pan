@@ -29,23 +29,28 @@ public class StateServiceImpl extends ExternalService implements StateService {
     public State save(State stateDTO) {
         State search= search(stateDTO.getUF());
         if(search!=null){
+            logger.warn("===estado já exite na base de dados====");
             return search;
         }
+        logger.info("====salvando estado====");
         return stateRepository.save(stateDTO);
     }
 
     @Override
     public State update(State stateDTO) {
+        logger.info("====alterando estado====");
         return stateRepository.save(stateDTO);
     }
 
     @Override
     public void delete(State stateDTO) {
+        logger.info("====deletando estado====");
          stateRepository.delete(stateDTO);
     }
 
     @Override
     public State search(String UF) {
+        logger.info("====buscando todos os estado exitente na base====");
         return  stateRepository.search(UF);
     }
 

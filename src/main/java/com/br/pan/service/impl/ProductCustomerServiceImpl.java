@@ -22,13 +22,15 @@ public class ProductCustomerServiceImpl implements ProductCustomerService {
     private ProductCustomerRepository productCustomerRepository;
     @Override
     public ProductCustomer save(ProductCustomer product) {
+        logger.info("====adicionando produto ao perfil do cliente====");
         return productCustomerRepository.save(product);
     }
 
     @Override
     public void delete(ProductCustomer product) throws Exception {
-        if(productCustomerRepository.existsById( product.getId())){
-            throw new Exception("Id de Municipio não informado");
+        if(!productCustomerRepository.existsById( product.getId())){
+            logger.error("====Id não informado====");
+            throw new Exception("Id não informado");
         }
         productCustomerRepository.delete(product);
     }
@@ -37,8 +39,10 @@ public class ProductCustomerServiceImpl implements ProductCustomerService {
     public List<ProductCustomer> search(String CPFCustomer) throws Exception {
         List<ProductCustomer> list= productCustomerRepository.search(CPFCustomer);
         if( list==null ){
+            logger.error("====Não encontrado produtos para este cliente====");
             throw new Exception("Não encontrado");
         }
+        logger.info("listando todos os produtos ligado ao perfil do cliente");
         return list;
     }
     

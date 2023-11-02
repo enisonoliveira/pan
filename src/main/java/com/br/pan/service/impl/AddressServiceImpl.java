@@ -38,21 +38,25 @@ public class AddressServiceImpl extends ExternalService implements AddressServic
 
     @Override
     public Address save(Address addressDTO) {
+        logger.info("====salvando no bd o endereço====");
         return addressRepository.save(addressDTO);
     }
 
     @Override
     public Address update(Address addressDTO) {
+        logger.info("====alterando no bd o endereço====");
         return addressRepository.save(addressDTO);
     }
 
     @Override
     public void delete(Address addressDTO) {
+        logger.info("====deletando no bd o endereço====");
         addressRepository.delete(addressDTO);
     }
 
     @Override
     public Address search(String CEP) throws URISyntaxException, InterruptedException {
+        logger.info("====procurando no bd o endereço====");
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         ResponseEntity<String> states = super.getAddressCEP(CEP);
@@ -61,11 +65,11 @@ public class AddressServiceImpl extends ExternalService implements AddressServic
         EnderecoRequestResponse stateResponse = null;
         try {
             stateResponse = objectMapper.readValue(convert, EnderecoRequestResponse.class);
-            logger.info(stateResponse.getBairro());
+            logger.info("consultado o bairro do CEP : "+stateResponse.getBairro());
         } catch (JsonMappingException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         address = new Address(null, null, null, stateResponse.getLogradouro(), stateResponse.getBairro(), null,
                 0);
@@ -89,9 +93,9 @@ public class AddressServiceImpl extends ExternalService implements AddressServic
             stateResponse = objectMapper.readValue(convert, EstadosRequestResponse[].class);
             logger.info(stateResponse[0].getNome());
         } catch (JsonMappingException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         return orderState(stateResponse);
 
@@ -135,8 +139,6 @@ public class AddressServiceImpl extends ExternalService implements AddressServic
             countStateArray++;
             countPositionStateArray++;
         }
-        logger.info(newStateResponse[0].getNome());
-        logger.info(newStateResponse[1].getNome());
         return newStateResponse;
     }
 

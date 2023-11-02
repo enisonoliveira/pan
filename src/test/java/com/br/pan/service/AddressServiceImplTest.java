@@ -30,13 +30,14 @@ public class AddressServiceImplTest {
         City city = new City();
         city.setName("Sorocaba");
         city.setNumero("22");
-
+        city.setId(1L);
         State state = new State();
         state.setName("São Paulo");
         state.setUF("SP");
         state=stateService.save(state);
 
         city.setState(state);
+        city.setId(1L);
         city=cityService.save(city);
         
         addressDTO.setCity(city);

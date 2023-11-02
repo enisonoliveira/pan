@@ -10,7 +10,7 @@ import com.br.pan.service.AddressService;
 import com.br.pan.service.CityService;
 import com.br.pan.service.CustomerService;
 import com.br.pan.service.StateService;
-import com.br.pan.vo.CustomerRequestSave;
+import com.br.pan.vo.ClienteRequestSave;
 import com.br.pan.vo.ClienteRequestUpdate;
 
 import org.slf4j.Logger;
@@ -45,7 +45,7 @@ public class CustomerController {
     
 
 	@PostMapping(value = "/customer/save", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> create(@RequestBody CustomerRequestSave customerRequest) throws Exception {
+	public ResponseEntity<String> create(@RequestBody ClienteRequestSave customerRequest) throws Exception {
 
 		logger.info("inserindo cliente"+customerRequest.getNome());
 
@@ -54,16 +54,19 @@ public class CustomerController {
 		customer.setCPF(customerRequest.getCPF());
 		Address address = addressService.search(customerRequest.getAddress().getCep());        
 		City city = new City();
-		city.setName(customerRequest.getAddress().getNomeMunicipio());
 		address.setNumber(customerRequest.getAddress().getNumero());
         State state = stateService.searchExternal(customerRequest.getAddress().getUf());
 		state= stateService.save(state);
+
 		city.setState(state);
+		city=cityService.searchExternal(customerRequest.getAddress().getNumeroIBGEMunicipio());
 		city=cityService.save(city);
+
 		address.setCity(city);
 		address.setZipCode(customerRequest.getAddress().getCep());
         address.setState(state);
 		address= addressService.save(address);
+		
         customer.setAddress(address);
 		customerService.save(customer);
 	
@@ -75,7 +78,7 @@ public class CustomerController {
 	public ResponseEntity<String> edit(@RequestBody ClienteRequestUpdate customerRequest) throws Exception {
 
 		Address address = addressService.search(customerRequest.getAddress().getCep());        City city = new City();
-		city.setName(customerRequest.getAddress().getNomeMunicipio());
+		city=cityService.searchExternal(customerRequest.getAddress().getNumeroIBGEMunicipio());
 		address.setNumber(customerRequest.getAddress().getNumero());
         State state = stateService.searchExternal(customerRequest.getAddress().getUf());
 		state= stateService.save(state);

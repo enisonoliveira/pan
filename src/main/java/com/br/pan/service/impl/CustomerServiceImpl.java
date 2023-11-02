@@ -20,24 +20,33 @@ public class CustomerServiceImpl  implements CustomerService{
     private CustomerRepository customerRepository;
 
     @Override
-    public Customer save(Customer customerDTO) {
+    public Customer save(Customer customerDTO) throws Exception {
+        logger.info("====salvando no bd o cliente====");
+        if(search(customerDTO.getCPF())!=null){
+            logger.warn("CPF já existe "+ customerDTO.getCPF());
+            return customerDTO;
+        }
         return customerRepository.save(customerDTO);
     }
 
     @Override
     public Customer update(Customer customerDTO) {
+        logger.info("====aterando no bd o cliente====");
         return customerRepository.save(customerDTO);
     }
 
     @Override
     public Customer search(String CPF) {
+        logger.info("====procurando no bd o cliente====");
         return customerRepository.search(CPF);
     }
 
 
     @Override
     public void delete(String CPF) throws Exception {
+        logger.info("====delete no bd o cliente====");
         if( search(CPF)==null ){
+            logger.error("CPF informado não existe no banco"+ CPF);
             throw new Exception("CPF informado não existe");
         }
         customerRepository.delete(CPF);
@@ -46,7 +55,7 @@ public class CustomerServiceImpl  implements CustomerService{
 
     @Override
     public List<Customer> findAll() {
-       
+        logger.info("listando todos os clientes");
         return customerRepository.findAll();
     }
     

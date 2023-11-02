@@ -7,7 +7,7 @@ import com.br.pan.model.Customer;
 public interface CustomerService {
     
 
-    public Customer save(Customer customerDTO );
+    public Customer save(Customer customerDTO ) throws Exception;
 
     public Customer update(Customer customerDTO );
 

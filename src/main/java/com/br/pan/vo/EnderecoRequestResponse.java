@@ -15,12 +15,21 @@ public class EnderecoRequestResponse {
     private String nomeMunicipio;
     @JsonProperty("numero")
     private int numero;
+    @JsonProperty("numeroIBGEMunicipio")
+    private String numeroIBGEMunicipio;
     @JsonProperty("localidade")
     private String localidade;
     @JsonProperty("complemento")
     private String complemento;
     @JsonProperty("uf")
     private String uf;
+
+    public String getNumeroIBGEMunicipio() {
+        return numeroIBGEMunicipio;
+    }
+    public void setNumeroIBGEMunicipio(String numeroIBGEMunicipio) {
+        this.numeroIBGEMunicipio = numeroIBGEMunicipio;
+    }
     public String getLogradouro() {
         return logradouro;
     }

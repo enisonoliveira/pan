@@ -1,6 +1,5 @@
 package com.br.pan.controller;
 
-
 import java.net.URISyntaxException;
 
 import com.br.pan.service.AddressService;
@@ -17,35 +16,34 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AddressController {
-    
 
-    Logger logger = LoggerFactory.getLogger( AddressController.class);
+    Logger logger = LoggerFactory.getLogger(AddressController.class);
 
     @Autowired
     private AddressService addressService;
 
     @GetMapping(value = "/address/search")
-	public ResponseEntity<String> searchCEP(@RequestParam String CEP) throws Exception {
-        
-        Gson gson = new Gson ( );
+    public ResponseEntity<String> searchCEP(@RequestParam String CEP) throws Exception {
+
+        Gson gson = new Gson();
         return ResponseEntity
-        .status( HttpStatus.OK)
-        .header("X-Reason", "ok")
-        .body(gson.toJson(  addressService.search(CEP)));
+                .status(HttpStatus.OK)
+                .header("X-Reason", "ok")
+                .body(gson.toJson(addressService.search(CEP)));
     }
 
-    @GetMapping(value = "/address/search/city")
-	public ResponseEntity<String> searchCityId(@RequestParam String id) throws Exception {
-        
-        return addressService.searchCity(id);
+    @GetMapping(value = "/address/search/municipio/")
+    public ResponseEntity<String> searchCityId(@RequestParam String codigo) throws Exception {
+
+        return addressService.searchCity(codigo);
     }
 
     @GetMapping(value = "/address/search/state")
-	public ResponseEntity<String> searchUF() throws InterruptedException, URISyntaxException  {
-        Gson gson = new Gson ( );
+    public ResponseEntity<String> searchUF() throws InterruptedException, URISyntaxException {
+        Gson gson = new Gson();
         return ResponseEntity
-        .status( HttpStatus.OK)
-        .header("X-Reason", "ok")
-        .body(gson.toJson( addressService.searchAllState()));
+                .status(HttpStatus.OK)
+                .header("X-Reason", "ok")
+                .body(gson.toJson(addressService.searchAllState()));
     }
 }

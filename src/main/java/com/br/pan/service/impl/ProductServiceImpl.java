@@ -20,16 +20,19 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product save(Product productDTO) {
+        logger.info("====salvando os dados do produto====");
         return productRepository.save(productDTO);
     }
 
     @Override
     public Product update(Product productDTO) {
+        logger.info("====alterando os dados do produto====");
         return productRepository.save(productDTO);
     }
 
     @Override
     public void delete(Product productDTO) {
+        logger.info("====deletando o produto:"+ productDTO.getName());
          productRepository.delete(productDTO);
         
     }
