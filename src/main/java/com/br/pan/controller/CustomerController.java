@@ -62,9 +62,10 @@ public class CustomerController {
         State state = stateService.searchExternal(customerRequest.getAddress().getUf());
 		state= stateService.save(state);
 
-		city.setState(state);
 		city=cityService.searchExternal(customerRequest.getAddress().getNumeroIBGEMunicipio());
+		city.setState(state);
 		city=cityService.save(city);
+		
 
 		address.setCity(city);
 		address.setZipCode(customerRequest.getAddress().getCep());
