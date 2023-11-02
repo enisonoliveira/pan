@@ -61,7 +61,7 @@ public class StateServiceImpl extends ExternalService implements StateService {
         try {
             states = super.searchUF(UF);
         } catch (URISyntaxException e1) {
-            e1.printStackTrace();
+            logger.error(e1.getMessage());
         }
         ObjectMapper objectMapper = new ObjectMapper();
         String convert = states.getBody();
@@ -71,9 +71,9 @@ public class StateServiceImpl extends ExternalService implements StateService {
             stateResponse = objectMapper.readValue(convert, EstadosRequestResponse.class);
             logger.info(stateResponse.getNome());
         } catch (JsonMappingException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         state = new State(Long.parseLong(stateResponse.getId()),stateResponse.getNome(), stateResponse.getSigla());
         return  state;
