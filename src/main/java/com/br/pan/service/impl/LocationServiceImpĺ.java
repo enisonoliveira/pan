@@ -64,12 +64,21 @@ public class LocationServiceImpĺ extends ExternalService implements LocationSer
         if (id == null) {
             logger.warn("===Id nulo====");
 
+        }else{
+            if(id.length()!=10){
+                logger.error("===Id nulo====");
+                throw new Exception("código único IBGE do Municipio esta incorreto");
+            }
         }
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         ResponseEntity<String> states = super.searchLocation(String.valueOf(id));
         JsonNode nodes = objectMapper.readTree(states.getBody());
         Location city = new Location();
+        if(nodes.size()==0){
+            logger.error("===Código IBGE inexistente====");
+            throw new Exception("código único IBGE do Municipio esta incorreto");
+        }
         city.setId(nodes.get(0).get("id").asLong());
         city.setName(nodes.get(0).get("nome").asText());
         city.setNumero(nodes.get(0).get("id").asText());
