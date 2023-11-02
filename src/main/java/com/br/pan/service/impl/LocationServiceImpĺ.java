@@ -63,12 +63,6 @@ public class LocationServiceImpĺ extends ExternalService implements LocationSer
     public Location searchExternal(String id) throws Exception {
         if (id == null) {
             logger.warn("===Id nulo====");
-
-        }else{
-            if(id.length()!=10){
-                logger.error("===Id nulo====");
-                throw new Exception("código único IBGE do Municipio esta incorreto");
-            }
         }
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);

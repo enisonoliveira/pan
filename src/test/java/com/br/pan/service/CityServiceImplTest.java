@@ -19,8 +19,8 @@ public class CityServiceImplTest {
     @BeforeEach
     void saveAddressTest() throws Exception{
         Location cityDTO = new Location();
-        cityDTO.setName("Sorocaba");
-        cityDTO.setNumero("22");
+        cityDTO.setName("Fazendinha");
+        cityDTO.setNumero("160030312");
         cityDTO.setId(1L);
         Location city = cityService.save(cityDTO);
         assertEquals(city.getName(),cityDTO.getName());
@@ -30,8 +30,8 @@ public class CityServiceImplTest {
     @Test
     void updateAddressTest() throws Exception{
         Location cityDTO = new Location();
-        cityDTO.setName("Sorocaba");
-        cityDTO.setNumero("22");
+        cityDTO.setName("Fazendinha");
+        cityDTO.setNumero("160030312");
         cityDTO.setId(1L);
         Location city = cityService.update(cityDTO);
         assertEquals(city.getName(),cityDTO.getName());
