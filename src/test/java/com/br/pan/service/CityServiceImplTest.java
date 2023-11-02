@@ -41,7 +41,7 @@ public class CityServiceImplTest {
     @Test
     void saveCitySearchTest() throws Exception{
         Location cityDTO = new Location();
-        cityDTO.setName("Fazendinha");
+        cityDTO.setName("Sorocaba");
         cityDTO.setNumero("160030312");
         cityDTO.setId(1L);
         cityService.save(cityDTO);
