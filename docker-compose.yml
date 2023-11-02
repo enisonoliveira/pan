@@ -7,9 +7,27 @@ services:
      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - 6379:6379
+    networks:
+      -local
   api:
     image: api-pan
     ports:
       - 8082:8080
-    links:
-      - api-database
+    networks:
+      -local
+  h2:
+    container_name: 'h2'
+    hostname: 'h2'
+    image: h2
+    ports:
+      - "8181:8181"
+      - "1521:1521"
+    volumes:
+      - h2-data:/opt/h2-data
+    networks:
+      -local
+  volumes:
+     h2-data:
+  networks:
+    local:
+      driver: bridge
