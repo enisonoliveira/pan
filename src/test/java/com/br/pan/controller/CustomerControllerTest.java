@@ -55,7 +55,7 @@ public class CustomerControllerTest {
     @Test
     void shouldReturnCustomerMessage() throws Exception {
         try {
-            customerService.delete("31231230");
+            customerService.delete("38106405700");
         } catch (Exception e) {
         }
 
@@ -64,7 +64,7 @@ public class CustomerControllerTest {
         address.setCep("18070090");
         address.setUf("SP");
         address.setNumeroIBGEMunicipio("160030312");
-        ClienteRequestSave customer = new ClienteRequestSave("Enison", "31231230", address);
+        ClienteRequestSave customer = new ClienteRequestSave("Enison", "38106405700", address);
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
         String requestJson = ow.writeValueAsString(customer);
@@ -77,7 +77,7 @@ public class CustomerControllerTest {
          mapper = new ObjectMapper();
         address.setCep("18070090");
         address.setUf("SP");
-        ClienteRequestUpdate customerUpdate = new ClienteRequestUpdate( "31231230", address);
+        ClienteRequestUpdate customerUpdate = new ClienteRequestUpdate( "38106405700", address);
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
          ow = mapper.writer().withDefaultPrettyPrinter();
          requestJson = ow.writeValueAsString(customerUpdate);
@@ -90,7 +90,7 @@ public class CustomerControllerTest {
 
     @Test
     void shouldSaveCustomerMessage() throws Exception {
-        this.mockMvc.perform(get("/customer/search/31231230")).andDo(print()).andExpect(status().isOk())
+        this.mockMvc.perform(get("/customer/search/38106405700")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString("")));
     }
 }

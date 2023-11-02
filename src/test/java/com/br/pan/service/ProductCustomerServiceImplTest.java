@@ -81,7 +81,7 @@ public class ProductCustomerServiceImplTest {
 
     @Test
     void searchProductCustomer() throws Exception{
-        List<ProductCustomer> productCustomer =productCustomerService.search("12312312");
+        List<ProductCustomer> productCustomer =productCustomerService.search("38106405700");
         assertEquals (productCustomer.get(0).getProduct().getName(),"cartao");
     }
 }

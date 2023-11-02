@@ -50,7 +50,7 @@ public class ProductCustomerControllerTest {
         address.setUf("SP");
         address.setNumero(133123);
         address.setNumeroIBGEMunicipio("160030312");
-        ClienteRequestSave customer = new ClienteRequestSave("Enison", "31231230", address);
+        ClienteRequestSave customer = new ClienteRequestSave("Enison", "38106405700", address);
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
         String requestJson = ow.writeValueAsString(customer);
