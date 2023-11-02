@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
 
 import com.br.pan.model.Address;
-import com.br.pan.model.City;
+import com.br.pan.model.Location;
 import com.br.pan.model.Customer;
 import com.br.pan.model.Product;
 import com.br.pan.model.ProductCustomer;
@@ -27,7 +27,7 @@ public class ProductCustomerServiceImplTest {
     @Autowired
     private AddressService addressService;
     @Autowired
-    private CityService cityService;
+    private LocationService cityService;
     @Autowired
     private StateService stateService;
     @Autowired
@@ -43,7 +43,7 @@ public class ProductCustomerServiceImplTest {
         productDTO.setName("cartao");
         productDTO.setId(1L);
         Address addressDTO = new Address();
-        City city = new City();
+        Location city = new Location();
         city.setName("Sorocaba");
         city.setNumero("22");
 

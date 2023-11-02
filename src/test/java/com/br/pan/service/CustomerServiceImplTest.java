@@ -3,7 +3,7 @@ package com.br.pan.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.br.pan.model.Address;
-import com.br.pan.model.City;
+import com.br.pan.model.Location;
 import com.br.pan.model.Customer;
 import com.br.pan.model.State;
 
@@ -20,7 +20,7 @@ public class CustomerServiceImplTest {
     @Autowired
     private AddressService addressService;
     @Autowired
-    private CityService cityService;
+    private LocationService cityService;
     @Autowired
     private StateService stateService;
 
@@ -28,7 +28,7 @@ public class CustomerServiceImplTest {
     @BeforeEach
     void saveCutomerTest() throws Exception {
         Address addressDTO = new Address();
-        City city = new City();
+        Location city = new Location();
         city.setName("Sorocaba");
         city.setNumero("22");
 
@@ -64,7 +64,7 @@ public class CustomerServiceImplTest {
     @Test
     void CutomerUpdateTest() throws Exception {
         Address addressDTO = new Address();
-        City city = new City();
+        Location city = new Location();
         city.setName("Sorocaba");
         city.setNumero("22");
 

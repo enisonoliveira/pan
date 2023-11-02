@@ -1,8 +1,8 @@
 package com.br.pan.service.impl;
 
-import com.br.pan.model.City;
+import com.br.pan.model.Location;
 import com.br.pan.repository.CityRepository;
-import com.br.pan.service.CityService;
+import com.br.pan.service.LocationService;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,15 +14,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CityServiceImpĺ extends ExternalService implements CityService {
+public class LocationServiceImpĺ extends ExternalService implements LocationService {
 
-    Logger logger = LoggerFactory.getLogger(CityServiceImpĺ.class);
+    Logger logger = LoggerFactory.getLogger(LocationServiceImpĺ.class);
 
     @Autowired
     private CityRepository cityRepository;
 
     @Override
-    public City save(City cityDTO) throws Exception {
+    public Location save(Location cityDTO) throws Exception {
 
         if (cityRepository.existsById(cityDTO.getId())) {
             logger.warn("===município já exite na base de dados====");
@@ -32,7 +32,7 @@ public class CityServiceImpĺ extends ExternalService implements CityService {
     }
 
     @Override
-    public City update(City cityDTO) throws Exception {
+    public Location update(Location cityDTO) throws Exception {
         if (!cityRepository.existsById(cityDTO.getId())) {
             logger.error("===Id de Municipio não informado====");
             throw new Exception("Id de Municipio não informado");
@@ -41,7 +41,7 @@ public class CityServiceImpĺ extends ExternalService implements CityService {
     }
 
     @Override
-    public void delete(City cityDTO) throws Exception {
+    public void delete(Location cityDTO) throws Exception {
         if (!cityRepository.existsById(cityDTO.getId())) {
             logger.error("===Id de Municipio não exite====");
             throw new Exception("Id de Municipio não exite");
@@ -50,7 +50,7 @@ public class CityServiceImpĺ extends ExternalService implements CityService {
     }
 
     @Override
-    public City search(Long id) throws Exception {
+    public Location search(Long id) throws Exception {
         if (id == null) {
             logger.warn("===Id nulo====");
 
@@ -60,7 +60,7 @@ public class CityServiceImpĺ extends ExternalService implements CityService {
     }
 
     @Override
-    public City searchExternal(String id) throws Exception {
+    public Location searchExternal(String id) throws Exception {
         if (id == null) {
             logger.warn("===Id nulo====");
 
@@ -69,7 +69,7 @@ public class CityServiceImpĺ extends ExternalService implements CityService {
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         ResponseEntity<String> states = super.searchLocation(String.valueOf(id));
         JsonNode nodes = objectMapper.readTree(states.getBody());
-        City city = new City();
+        Location city = new Location();
         city.setId(nodes.get(0).get("id").asLong());
         city.setName(nodes.get(0).get("nome").asText());
         city.setNumero(nodes.get(0).get("id").asText());

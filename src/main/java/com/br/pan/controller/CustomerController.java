@@ -3,11 +3,11 @@ package com.br.pan.controller;
 import java.util.List;
 
 import com.br.pan.model.Address;
-import com.br.pan.model.City;
+import com.br.pan.model.Location;
 import com.br.pan.model.Customer;
 import com.br.pan.model.State;
 import com.br.pan.service.AddressService;
-import com.br.pan.service.CityService;
+import com.br.pan.service.LocationService;
 import com.br.pan.service.CustomerService;
 import com.br.pan.service.StateService;
 import com.br.pan.vo.ClienteRequestSave;
@@ -39,7 +39,7 @@ public class CustomerController {
     @Autowired
     private AddressService addressService;
     @Autowired
-    private CityService cityService;
+    private LocationService cityService;
     @Autowired
     private StateService stateService;
     
@@ -55,7 +55,7 @@ public class CustomerController {
 		
 		Address address = addressService.search(customerRequest.getAddress().getCep());        
 		
-		City city = new City();
+		Location city = new Location();
 		
 		address.setNumber(customerRequest.getAddress().getNumero());
 
@@ -86,7 +86,7 @@ public class CustomerController {
 		Address address = addressService.search(customerRequest.getAddress().getCep());        
 		address.setId(oldAddress.getId());
 
-		City city = new City();
+		Location city = new Location();
 		city=cityService.searchExternal(customerRequest.getAddress().getNumeroIBGEMunicipio());
 		
 		address.setNumber(customerRequest.getAddress().getNumero());

@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class City {
+public class Location {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
@@ -14,14 +14,14 @@ public class City {
     private String numero;
     @ManyToOne
     private State state;
-    public City(){}
+    public Location(){}
     public String getNumero() {
         return numero;
     }
     public void setNumero(String numero) {
         this.numero = numero;
     }
-    public City(Long id, String name, State state) {
+    public Location(Long id, String name, State state) {
         this.id = id;
         this.name = name;
         this.state = state;

@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import com.br.pan.model.Address;
-import com.br.pan.model.City;
+import com.br.pan.model.Location;
 import com.br.pan.model.State;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +19,7 @@ public class AddressServiceImplTest {
     @Autowired
     private AddressService addressService;
     @Autowired
-    private CityService cityService;
+    private LocationService cityService;
     @Autowired
     private StateService stateService;
 
@@ -27,7 +27,7 @@ public class AddressServiceImplTest {
     @BeforeEach
     void saveAddressTest() throws Exception{
         Address addressDTO = new Address();
-        City city = new City();
+        Location city = new Location();
         city.setName("Sorocaba");
         city.setNumero("22");
         city.setId(1L);

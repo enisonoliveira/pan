@@ -15,14 +15,14 @@ public class Address {
     @ManyToOne
     private State state;
     @ManyToOne
-    private City city;
+    private Location city;
     private String street;
     private String neigborHood;
     private String zipCode;
     private int number;
 
     public Address(Long id, State state,
-            City city, String street, String neigborHood,
+            Location city, String street, String neigborHood,
             String zipCode, int number) {
         this.id = id;
         this.state = state;
@@ -45,11 +45,11 @@ public class Address {
         this.state = state;
     }
 
-    public City getCity() {
+    public Location getCity() {
         return city;
     }
 
-    public void setCity(City city) {
+    public void setCity(Location city) {
         this.city = city;
     }
 
