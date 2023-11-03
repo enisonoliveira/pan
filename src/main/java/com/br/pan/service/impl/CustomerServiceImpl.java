@@ -74,7 +74,7 @@ public class CustomerServiceImpl  implements CustomerService{
     *@see   public List<Customer> findAll()
     */
     @Override
-    @Cacheable(value = "_methods")
+    @Cacheable(value = "customerCache")
     public List<Customer> findAll() {
         logger.info("listando todos os clientes");
         return customerRepository.findAll();
