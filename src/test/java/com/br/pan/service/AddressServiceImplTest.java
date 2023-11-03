@@ -22,6 +22,7 @@ public class AddressServiceImplTest {
     private LocationService cityService;
     @Autowired
     private StateService stateService;
+    
 
     @Test
     @BeforeEach
